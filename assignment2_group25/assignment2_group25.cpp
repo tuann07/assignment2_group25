@@ -1,12 +1,47 @@
 // assignment2_group25.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
+using namespace std;
 
 #include <iostream>
+enum TypeOfAccount { GuestAccount, RegularAccount, VipAccount };
+
+class Customer {
+
+private:
+	string ID;
+	string name;
+	string address;
+	string phone;
+	int rewardPoint;
+	TypeOfAccount typeOfAccount;
+	string listOfRentals;
+
+public:
+	Customer(string a="", string b ="", string c="", string d="", int e = 0, TypeOfAccount f = GuestAccount, string g ="") {
+		ID = a;
+		name = b;
+		address = c;
+		phone = d;
+		rewardPoint = e;
+		typeOfAccount = f;
+		listOfRentals = g;
+
+	}
+
+
+
+
+
+};
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	std::cout << "Hello World!\n";
+	cout << VipAccount << endl;
 }
+
+
+
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
