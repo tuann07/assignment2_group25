@@ -1,7 +1,14 @@
-// assignment2_group25.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
+#include <iostream>
 using namespace std;
 
+void team_detail() {
+    cout << "" << endl;
+    cout << "ASIGNMENT 2 - GROUP 25" << endl;
+    cout << "s3825455, s3825455@rmit.edu.vn, Thien An, Nguyen Hoang" << endl;
+    cout << "s3893635, s3893635@rmit.edu.vn, Minh Quan, Che" << endl;
+    cout << "s3875336, s3875336@rmit.edu.vn, Nam Vinh, Nguyen" << endl;
+    cout << "s3817907, s3817907@rmit.edu.vn, Anh Tuan, Nguyen" << endl;
+}
 #include <iostream>
 enum TypeOfAccount { GuestAccount, RegularAccount, VipAccount };
 
@@ -36,20 +43,6 @@ public:
 
 int main()
 {
-	std::cout << "Hello World!\n";
-	cout << VipAccount << endl;
+    team_detail();
 }
 
-
-
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
