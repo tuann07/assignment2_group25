@@ -78,6 +78,11 @@ int main()
         isValid = validate_input(userInput);
     }
 
+    if (userInput == "exit") {
+        team_detail();
+        return 0;
+    }
+
     return 0;
 
     
