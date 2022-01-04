@@ -18,6 +18,7 @@ void team_detail() {
 }
 
 void main_menu() {
+    cout << "========================================" << endl;
     cout << "Welcome to Genie's video store" << endl;
     cout << "Enter an option below." << endl;
     cout << "1. Add a new item, update or delete an existing item" << endl;
@@ -31,6 +32,43 @@ void main_menu() {
     cout << "9. Display group of customers " << endl;
     cout << "10. Search items or customers " << endl;
     cout << "Enter the number or type 'Exit' to quit: ";
+}
+
+void crud_item() {
+    cout << "========================================" << endl;
+    cout << "ADD - UPDATE - DELETE ITEM" << endl;
+    cout << "Enter an option below." << endl;
+    cout << "1. Add new item" << endl;
+    cout << "2. Update an item" << endl;
+    cout << "3. Update an item" << endl;
+    cout << "Enter the number or type 'Exit' to quit: ";
+}
+
+void crud_customer() {
+    cout << "========================================" << endl;
+    cout << "ADD - UPDATE CUSTOMER" << endl;
+    cout << "Enter an option below." << endl;
+    cout << "1. Add new customer" << endl;
+    cout << "2. Update a customer" << endl;
+    cout << "Enter the number or type 'Exit' to quit: ";
+}
+
+void promote_customer() {
+    cout << "========================================" << endl;
+    cout << "PROMOTE CUSTOMER" << endl;
+    cout << "Enter the customer ID or type 'Exit' to quit: ";
+}
+
+void rent_item() {
+    cout << "========================================" << endl;
+    cout << "RENT AN ITEM" << endl;
+    cout << "Enter the item ID or type 'Exit' to quit: ";
+}
+
+void return_item() {
+    cout << "========================================" << endl;
+    cout << "RETURN AN ITEM" << endl;
+    cout << "Enter the item ID or type 'Exit' to quit: ";
 }
 
 string lower_input(string input) {
@@ -49,10 +87,8 @@ bool validate_input(string input) {
             if (input == num[i]) {
                 return true;
             }
-            else {
-                return false;
-            }
         }
+        return false;
     }
     else {
         return true;
@@ -63,20 +99,132 @@ bool validate_input(string input) {
 int main()
 {
     string userInput;
+    string secondUserInput;
     bool isValid;
     Customer* c1 = new Customer("C001", "Thien An", "RMIT Uni", "123456", 0, "none");
 
-    main_menu();
-    cin >> userInput;
-    userInput = lower_input(userInput);
-    isValid = validate_input(userInput);
-    
-    while (userInput != "exit" && isValid) {
+    do {
         main_menu();
         cin >> userInput;
         userInput = lower_input(userInput);
         isValid = validate_input(userInput);
-    }
+
+       /* if (!isValid) {
+            cout << "INVALID OPTION" << endl;
+        }*/
+
+        if (userInput == "1") {
+            do {
+                crud_item();
+                cin >> secondUserInput;
+                secondUserInput = lower_input(secondUserInput);
+                cout << secondUserInput << endl;
+                
+                if (secondUserInput == "1") {}
+                if (secondUserInput == "2") {}
+                if (secondUserInput == "3") {}
+
+
+
+            } while (secondUserInput != "exit");
+        }
+
+        if (userInput == "2") {
+            do {
+                crud_customer();
+                cin >> secondUserInput;
+                secondUserInput = lower_input(secondUserInput);
+                cout << secondUserInput << endl;
+
+                if (secondUserInput == "1") {}
+                if (secondUserInput == "2") {}
+            }
+            while (secondUserInput != "exit");
+        }
+
+        if (userInput == "3") {
+            do {
+                promote_customer();
+                cin >> secondUserInput;
+                secondUserInput = lower_input(secondUserInput);
+
+            } while (secondUserInput != "exit");
+        }
+
+        if (userInput == "4") {
+            do {
+                rent_item();
+                cin >> secondUserInput;
+                secondUserInput = lower_input(secondUserInput);
+
+            } while (secondUserInput != "exit");
+        }
+
+        if (userInput == "5") {
+            do {
+                return_item();
+                cin >> secondUserInput;
+                secondUserInput = lower_input(secondUserInput);
+
+            } while (secondUserInput != "exit");
+        }
+
+        if (userInput == "6") {
+            do {
+                return_item();
+                cin >> secondUserInput;
+                secondUserInput = lower_input(secondUserInput);
+
+            } while (secondUserInput != "exit");
+        }
+
+        if (userInput == "7") {
+            do {
+                return_item();
+                cin >> secondUserInput;
+                secondUserInput = lower_input(secondUserInput);
+
+            } while (secondUserInput != "exit");
+        }
+
+        if (userInput == "8") {
+            do {
+                return_item();
+                cin >> secondUserInput;
+                secondUserInput = lower_input(secondUserInput);
+
+            } while (secondUserInput != "exit");
+        }
+
+        if (userInput == "9") {
+            do {
+                return_item();
+                cin >> secondUserInput;
+                secondUserInput = lower_input(secondUserInput);
+
+            } while (secondUserInput != "exit");
+        }
+
+        if (userInput == "10") {
+            do {
+                return_item();
+                cin >> secondUserInput;
+                secondUserInput = lower_input(secondUserInput);
+
+            } while (secondUserInput != "exit");
+        }
+
+
+
+
+
+
+
+
+
+
+
+    } while (userInput != "exit");
 
     if (userInput == "exit") {
         team_detail();
