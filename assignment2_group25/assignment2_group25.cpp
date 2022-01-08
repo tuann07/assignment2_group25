@@ -103,6 +103,16 @@ void return_item()
     cout << "Enter the item ID or type 'Exit' to quit: ";
 }
 
+void display_all_item()
+{
+    cout << "========================================" << endl;
+    cout << "DISPLAY ALL ITEMS" << endl;
+    cout << "1. Sort by ID" << endl;
+    cout << "2. Sort by name" << endl;
+    cout << "Enter the option or type 'Exit' to quit: ";
+}
+
+
 string lower_input(string input)
 {
     for (int i = 0; i < input.length(); i++)
@@ -111,6 +121,73 @@ string lower_input(string input)
     }
     return input;
 }
+
+void display_item_info(Item* item) {
+    cout << item->getTitle() << " | " << item->getId() << " | " << item->getRentalType() << " | " << item->getLoanType() << " | " << item->getCopies() << " | " << item->getRentalFee() << " | " << item->getAvailable() << endl;
+}
+
+void sort_item_by_name(vector<Item*>& items) {
+    vector<string> itemsName;
+    for (int i = 0; i < items.size(); i++) {
+        itemsName.push_back((items[i]->getTitle()));
+    }
+    for (int i = 0; i < itemsName.size(); ++i) {
+        // Locate next lowest element (it should be in that position).
+
+        int minPos = i;
+        for (int k = i + 1; k < itemsName.size(); ++k) {
+            if (itemsName.at(minPos) < itemsName.at(k)) {
+                minPos = k;
+            }
+        }
+
+        // If not already there, swap it with what is there.
+
+        if (i != minPos) {
+            string temp = itemsName.at(minPos);
+            itemsName.at(minPos) = itemsName.at(i);
+            itemsName.at(i) = temp;
+        }
+    }
+    cout << endl;
+    cout << "LIST OF ITEMS" << endl;
+    cout << "Title | ID | Rental type | Loan type | Copies | Rental fee | Available" << endl;
+    for (int i = itemsName.size() - 1; i >= 0; i--) {
+        for (int j = 0; j < items.size(); j++) {
+            if (itemsName[i] == items[j]->getTitle()) {
+                string available;
+                if (items[j]->getAvailable() == 1) {
+                    available = "Yes";
+                }
+                else {
+                    available = "No";
+
+                }
+                display_item_info(items[j]);
+            }
+        }
+    }
+    cout << endl;
+
+}
+
+
+void display_out_of_stock_items(vector<Item*>& items) {
+    cout << endl;
+    cout << "LIST OF OUT-OF-STOCK ITEMS" << endl;
+    int count = 0;
+    for (int i = 0; i < items.size(); i++) {
+        if (items[i]->getAvailable() == 0) {
+            display_item_info(items[i]);
+            count += 1;
+        }
+    }
+    if (count == 0) {
+        cout << "All of the items are available!" << endl;
+    }
+    cout << endl;
+}
+
 
 bool validate_input(string input)
 {
@@ -192,14 +269,20 @@ void read_item_file(string filename, vector<Item *> &items)
     myfile.close();
 }
 
-int main()
+int main(int argc, char* argv[])
 {
+    //if (argc != 3) {
+    //    cerr << "Please provide a file name." << endl;
+    //    return 0;
+    //}
+
     string userInput;
     string secondUserInput;
     bool isValid;
-    Customer *c1 = new Customer("C001", "Thien An", "RMIT Uni", "123456", 0, "none");
+  
+    vector<Item*> items;
+    read_item_file("item.txt", items);
 
-    vector<Item*> customers;
 
     do
     {
@@ -289,9 +372,21 @@ int main()
         {
             do
             {
-                return_item();
+                display_all_item();
                 cin >> secondUserInput;
                 secondUserInput = lower_input(secondUserInput);
+
+                if (secondUserInput == "1") {
+
+                }
+
+                if (secondUserInput == "2") {
+                    sort_item_by_name(items);
+                    cout << "Type 'Exit' to return to main menu: ";
+                    cin >> secondUserInput;
+                    cout << endl;
+                    secondUserInput = lower_input(secondUserInput);
+                }
 
             } while (secondUserInput != "exit");
         }
@@ -300,8 +395,10 @@ int main()
         {
             do
             {
-                return_item();
+                display_out_of_stock_items(items);
+                cout << "Type 'Exit' to return to main menu: ";
                 cin >> secondUserInput;
+                cout << endl;
                 secondUserInput = lower_input(secondUserInput);
 
             } while (secondUserInput != "exit");
