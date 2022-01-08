@@ -8,31 +8,32 @@ class Item
 protected:
 	string id;
 	string title;
-	int rentalType; // 1 = Record, 2 = DVD, 3 = Game
-	int loanType;	// 1 = 2-day, 2 = 1-week
+	string rentalType;
+	string loanType;
 	int copies;
-	float rentalFee;
+	double rentalFee;
 	bool available;
 
 public:
 	// constructor
 	Item();
-	Item(string id, string title, int rentalType, int loanType, int copies, float rentalFee);
-	Item(Item &i);
+	Item(string id, string title, string rentalType, string loanType, int copies, double rentalFee);
+	// Item(Item &i);
+	~Item() {};
 	// getters
 	string getId();
 	string getTitle();
-	int getRentalType();
-	int getLoanType();
+	string getRentalType();
+	string getLoanType();
 	int getCopies();
-	float getRentalFee();
+	double getRentalFee();
 	bool getAvailable();
 	// setters
 	void setId(string id);
 	void setTitle(string title);
-	void setRentalType(int rentalType);
-	void setLoanType(int loanType);
+	void setRentalType(string rentalType);
+	void setLoanType(string loanType);
 	void setCopies(int copies);
-	void setRentalFee(float rentalFee);
+	void setRentalFee(double rentalFee);
 	void setAvailable(bool available);
 };

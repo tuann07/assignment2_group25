@@ -1,7 +1,7 @@
 #include "Item.h"
 
 Item::Item() {}
-Item::Item(string id, string title, int rentalType, int loanType, int copies, float rentalFee)
+Item::Item(string id, string title, string rentalType, string loanType, int copies, double rentalFee)
 {
     this->id = id;
     this->title = title;
@@ -11,15 +11,15 @@ Item::Item(string id, string title, int rentalType, int loanType, int copies, fl
     this->rentalFee = rentalFee;
     this->available = true;
 }
-Item::Item(Item& i) {
-    this->id = i.getId();
-    this->title = i.getTitle();
-    this->rentalType = i.getRentalType();
-    this->loanType = i.getLoanType();
-    this->copies = i.getCopies();
-    this->rentalFee = i.getRentalFee();
-    this->available = i.getAvailable();
-}
+// Item::Item(Item& i) {
+//     this->id = i.getId();
+//     this->title = i.getTitle();
+//     this->rentalType = i.getRentalType();
+//     this->loanType = i.getLoanType();
+//     this->copies = i.getCopies();
+//     this->rentalFee = i.getRentalFee();
+//     this->available = i.getAvailable();
+// }
 
 // getters
 string Item::getId()
@@ -30,11 +30,11 @@ string Item::getTitle()
 {
     return title;
 }
-int Item::getRentalType()
+string Item::getRentalType()
 {
     return rentalType;
 }
-int Item::getLoanType()
+string Item::getLoanType()
 {
     return loanType;
 }
@@ -42,7 +42,7 @@ int Item::getCopies()
 {
     return copies;
 }
-float Item::getRentalFee()
+double Item::getRentalFee()
 {
     return rentalFee;
 }
@@ -59,11 +59,11 @@ void Item::setTitle(string title)
 {
     this->title = title;
 }
-void Item::setRentalType(int rentalType)
+void Item::setRentalType(string rentalType)
 {
     this->rentalType = rentalType;
 }
-void Item::setLoanType(int loanType)
+void Item::setLoanType(string loanType)
 {
     this->loanType = loanType;
 }
@@ -71,7 +71,7 @@ void Item::setCopies(int copies)
 {
     this->copies = copies;
 }
-void Item::setRentalFee(float rentalFee)
+void Item::setRentalFee(double rentalFee)
 {
     this->rentalFee = rentalFee;
 }
