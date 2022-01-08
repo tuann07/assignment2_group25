@@ -199,6 +199,8 @@ int main()
     bool isValid;
     Customer *c1 = new Customer("C001", "Thien An", "RMIT Uni", "123456", 0, "none");
 
+    vector<Item*> customers;
+
     do
     {
         main_menu();
