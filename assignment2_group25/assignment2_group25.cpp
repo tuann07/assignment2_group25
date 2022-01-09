@@ -10,7 +10,128 @@
 
 using namespace std;
 
-vector<string> split_string(string s, string delimeter)
+// DISPLAY FUNCTIONS
+void main_menu() // Application main menu
+{
+	cout << "========================================" << endl;
+	cout << "Welcome to Genie's video store" << endl;
+	cout << "Enter an option below." << endl;
+	cout << "1. Add a new item, update or delete an existing item" << endl;
+	cout << "2. Add new customer or update an existing customer" << endl;
+	cout << "3. Promote an existing customer " << endl;
+	cout << "4. Rent an item" << endl;
+	cout << "5. Return an item" << endl;
+	cout << "6. Display all items" << endl;
+	cout << "7. Display out-of-stock items" << endl;
+	cout << "8. Display all customers" << endl;
+	cout << "9. Display group of customers " << endl;
+	cout << "10. Search items or customers " << endl;
+	cout << "Enter the number or type 'Exit' to quit: ";
+}
+
+void crud_item() //interface for CRUD items
+{
+	cout << "========================================" << endl;
+	cout << "ADD - UPDATE - DELETE ITEM" << endl;
+	cout << "Enter an option below." << endl;
+	cout << "1. Add new item" << endl;
+	cout << "2. Update an item" << endl;
+	cout << "3. Update an item" << endl;
+	cout << "Enter the number or type 'Exit' to quit: ";
+}
+
+void crud_customer() //interface for CRUD customers
+{
+	cout << "========================================" << endl;
+	cout << "ADD - UPDATE CUSTOMER" << endl;
+	cout << "Enter an option below." << endl;
+	cout << "1. Add new customer" << endl;
+	cout << "2. Update a customer" << endl;
+	cout << "Enter the number or type 'Exit' to quit: ";
+}
+
+void promote_customer() // Interface for promote customer
+{
+	cout << "========================================" << endl;
+	cout << "PROMOTE CUSTOMER" << endl;
+	cout << "Enter the customer ID or type 'Exit' to quit: ";
+}
+
+void rent_item() // Interface to rent item
+{
+	cout << "========================================" << endl;
+	cout << "RENT AN ITEM" << endl;
+	cout << "Enter the item ID or type 'Exit' to quit: ";
+}
+
+void return_item() // Interface to return item
+{
+	cout << "========================================" << endl;
+	cout << "RETURN AN ITEM" << endl;
+	cout << "Enter the item ID or type 'Exit' to quit: ";
+}
+
+void display_all_item() // Interface for display all items
+{
+	cout << "========================================" << endl;
+	cout << "DISPLAY ALL ITEMS" << endl;
+	cout << "1. Sort by ID" << endl;
+	cout << "2. Sort by name" << endl;
+	cout << "Enter the option or type 'Exit' to quit: ";
+}
+
+void search_items() // Interface for search items
+{
+	cout << "========================================" << endl;
+	cout << "SEARCH ITEMS" << endl;
+	cout << "1. Search by ID" << endl;
+	cout << "2. Search by name" << endl;
+	cout << "Enter the option or type 'Exit' to quit: ";
+}
+
+// ULTILITY FUNCTIONS
+string lower_input(string input) // Lowercase user's input
+{
+	for (int i = 0; i < input.length(); i++)
+	{
+		input[i] = tolower(input[i]);
+	}
+	return input;
+}
+
+void team_detail() // Display team details
+{
+	cout << "" << endl;
+	cout << "ASIGNMENT 2 - GROUP 25" << endl;
+	cout << "s3825455, s3825455@rmit.edu.vn, Thien An, Nguyen Hoang" << endl;
+	cout << "s3893635, s3893635@rmit.edu.vn, Minh Quan, Che" << endl;
+	cout << "s3875336, s3875336@rmit.edu.vn, Nam Vinh, Nguyen" << endl;
+	cout << "s3817907, s3817907@rmit.edu.vn, Anh Tuan, Nguyen" << endl;
+}
+
+bool validate_input(string input) // Validate user's input
+{
+	string num[9] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+	int size = num->size();
+	input = lower_input(input);
+	if (input != "exit")
+	{
+		for (int i = 0; i < size; i++)
+		{
+			if (input == num[i])
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+
+vector<string> split_string(string s, string delimeter) // Split string
 {
 	vector<string> result;
 	string temp;
@@ -33,216 +154,13 @@ vector<string> split_string(string s, string delimeter)
 	return result;
 }
 
-void team_detail()
-{
-	cout << "" << endl;
-	cout << "ASIGNMENT 2 - GROUP 25" << endl;
-	cout << "s3825455, s3825455@rmit.edu.vn, Thien An, Nguyen Hoang" << endl;
-	cout << "s3893635, s3893635@rmit.edu.vn, Minh Quan, Che" << endl;
-	cout << "s3875336, s3875336@rmit.edu.vn, Nam Vinh, Nguyen" << endl;
-	cout << "s3817907, s3817907@rmit.edu.vn, Anh Tuan, Nguyen" << endl;
+void display_item_info(Item* item) // Display item info
+{ 
+	cout << item->getId() << " | " << item->getTitle() << " | " << item->getRentalType() << " | "
+		<< item->getLoanType() << " | " << item->getCopies() << " | " << item->getRentalFee() << endl;
 }
 
-void main_menu()
-{
-	cout << "========================================" << endl;
-	cout << "Welcome to Genie's video store" << endl;
-	cout << "Enter an option below." << endl;
-	cout << "1. Add a new item, update or delete an existing item" << endl;
-	cout << "2. Add new customer or update an existing customer" << endl;
-	cout << "3. Promote an existing customer " << endl;
-	cout << "4. Rent an item" << endl;
-	cout << "5. Return an item" << endl;
-	cout << "6. Display all items" << endl;
-	cout << "7. Display out-of-stock items" << endl;
-	cout << "8. Display all customers" << endl;
-	cout << "9. Display group of customers " << endl;
-	cout << "10. Search items or customers " << endl;
-	cout << "Enter the number or type 'Exit' to quit: ";
-}
-
-void crud_item()
-{
-	cout << "========================================" << endl;
-	cout << "ADD - UPDATE - DELETE ITEM" << endl;
-	cout << "Enter an option below." << endl;
-	cout << "1. Add new item" << endl;
-	cout << "2. Update an item" << endl;
-	cout << "3. Update an item" << endl;
-	cout << "Enter the number or type 'Exit' to quit: ";
-}
-
-void crud_customer()
-{
-	cout << "========================================" << endl;
-	cout << "ADD - UPDATE CUSTOMER" << endl;
-	cout << "Enter an option below." << endl;
-	cout << "1. Add new customer" << endl;
-	cout << "2. Update a customer" << endl;
-	cout << "Enter the number or type 'Exit' to quit: ";
-}
-
-void promote_customer()
-{
-	cout << "========================================" << endl;
-	cout << "PROMOTE CUSTOMER" << endl;
-	cout << "Enter the customer ID or type 'Exit' to quit: ";
-}
-
-void rent_item()
-{
-	cout << "========================================" << endl;
-	cout << "RENT AN ITEM" << endl;
-	cout << "Enter the item ID or type 'Exit' to quit: ";
-}
-
-void return_item()
-{
-	cout << "========================================" << endl;
-	cout << "RETURN AN ITEM" << endl;
-	cout << "Enter the item ID or type 'Exit' to quit: ";
-}
-
-void display_all_item()
-{
-	cout << "========================================" << endl;
-	cout << "DISPLAY ALL ITEMS" << endl;
-	cout << "1. Sort by ID" << endl;
-	cout << "2. Sort by name" << endl;
-	cout << "Enter the option or type 'Exit' to quit: ";
-}
-
-void search_items()
-{
-	cout << "========================================" << endl;
-	cout << "SEARCH ITEMS" << endl;
-	cout << "1. Search by ID" << endl;
-	cout << "2. Search by name" << endl;
-	cout << "Enter the option or type 'Exit' to quit: ";
-}
-
-
-string lower_input(string input)
-{
-	for (int i = 0; i < input.length(); i++)
-	{
-		input[i] = tolower(input[i]);
-	}
-	return input;
-}
-
-void display_item_info(Item* item) {
-	cout << item->getId() << " | " << item->getTitle() << " | " << item->getRentalType() << " | " << item->getLoanType() << " | " << item->getCopies() << " | " << item->getRentalFee() << endl;
-}
-
-void sort_item_by_name(vector<Item*>& items) {
-	vector<string> itemsName;
-	for (int i = 0; i < items.size(); i++) {
-		itemsName.push_back((items[i]->getTitle()));
-	}
-	for (int i = 0; i < itemsName.size(); ++i) {
-		// Locate next lowest element (it should be in that position).
-
-		int minPos = i;
-		for (int k = i + 1; k < itemsName.size(); ++k) {
-			if (itemsName.at(minPos) < itemsName.at(k)) {
-				minPos = k;
-			}
-		}
-
-		// If not already there, swap it with what is there.
-
-		if (i != minPos) {
-			string temp = itemsName.at(minPos);
-			itemsName.at(minPos) = itemsName.at(i);
-			itemsName.at(i) = temp;
-		}
-	}
-	cout << endl;
-	cout << "LIST OF ITEMS" << endl;
-	cout << "   ID     | TITLE | Rental type | Loan type | Copies | Rental fee" << endl;
-	for (int i = itemsName.size() - 1; i >= 0; i--) {
-		for (int j = 0; j < items.size(); j++) {
-			if (itemsName[i] == items[j]->getTitle()) {
-				string available;
-				if (items[j]->getAvailable() == 1) {
-					available = "Yes";
-				}
-				else {
-					available = "No";
-
-				}
-				display_item_info(items[j]);
-			}
-		}
-	}
-	cout << endl;
-
-}
-
-
-void display_out_of_stock_items(vector<Item*>& items) {
-	cout << endl;
-	cout << "LIST OF OUT-OF-STOCK ITEMS" << endl;
-	int count = 0;
-	for (int i = 0; i < items.size(); i++) {
-		if (items[i]->getAvailable() == 0) {
-			display_item_info(items[i]);
-			count += 1;
-		}
-	}
-	if (count == 0) {
-		cout << "All of the items are available!" << endl;
-	}
-	cout << endl;
-}
-
-void search_item(vector<Item*>& items, string param, int type) {
-	param = lower_input(param);
-	if (type == 1) {
-		cout << endl;
-		for (int i = 0; i < items.size(); i++) {
-			if (lower_input(items[i]->getId()) == param) {
-				display_item_info(items[i]);
-			}
-		}
-		cout << endl;
-	}
-	else if (type == 2) {
-		cout << endl;
-		for (int i = 0; i < items.size(); i++) {
-			if (lower_input(items[i]->getTitle()) == param) {
-				display_item_info(items[i]);
-			}
-		}
-		cout << endl;
-	}
-}
-
-
-bool validate_input(string input)
-{
-	string num[9] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
-	int size = num->size();
-	input = lower_input(input);
-	if (input != "exit")
-	{
-		for (int i = 0; i < size; i++)
-		{
-			if (input == num[i])
-			{
-				return true;
-			}
-		}
-		return false;
-	}
-	else
-	{
-		return true;
-	}
-}
-
-void read_item_file(string filename, vector<Item*>& items)
+void read_item_file(string filename, vector<Item*>& items) // Read txt file and parse
 {
 	const int normal_length = 6;
 	const int genre_length = 7;
@@ -298,6 +216,108 @@ void read_item_file(string filename, vector<Item*>& items)
 	}
 
 	myfile.close();
+}
+
+// FUNCTION 1: CRUD ITEMS
+
+// FUNCTION 2: CRUD CUSTOMERS
+
+// FUNCTION 3: PROMOTE CUSTOMERS
+
+// FUNCTION 4: RENT AN ITEM
+
+// FUNCTION 5: RETURN AN ITEM
+
+// FUNCTION 6: DISPLAY ALL ITEMS
+void sort_item_by_name(vector<Item*>& items) // Display items sorted by name
+{
+	vector<string> itemsName;
+	for (int i = 0; i < items.size(); i++) {
+		itemsName.push_back((items[i]->getTitle()));
+	}
+	for (int i = 0; i < itemsName.size(); ++i) {
+		// Locate next lowest element (it should be in that position).
+
+		int minPos = i;
+		for (int k = i + 1; k < itemsName.size(); ++k) {
+			if (itemsName.at(minPos) < itemsName.at(k)) {
+				minPos = k;
+			}
+		}
+
+		// If not already there, swap it with what is there.
+
+		if (i != minPos) {
+			string temp = itemsName.at(minPos);
+			itemsName.at(minPos) = itemsName.at(i);
+			itemsName.at(i) = temp;
+		}
+	}
+	cout << endl;
+	cout << "LIST OF ITEMS" << endl;
+	cout << "   ID     | TITLE | Rental type | Loan type | Copies | Rental fee" << endl;
+	for (int i = itemsName.size() - 1; i >= 0; i--) {
+		for (int j = 0; j < items.size(); j++) {
+			if (itemsName[i] == items[j]->getTitle()) {
+				string available;
+				if (items[j]->getAvailable() == 1) {
+					available = "Yes";
+				}
+				else {
+					available = "No";
+
+				}
+				display_item_info(items[j]);
+			}
+		}
+	}
+	cout << endl;
+}
+
+// FUNCTION 7: DISPLAY OUT-OF-STOCK ITEMS
+void display_out_of_stock_items(vector<Item*>& items) // Display out-of-stock items
+{
+	cout << endl;
+	cout << "LIST OF OUT-OF-STOCK ITEMS" << endl;
+	int count = 0;
+	for (int i = 0; i < items.size(); i++) {
+		if (items[i]->getAvailable() == 0) {
+			display_item_info(items[i]);
+			count += 1;
+		}
+	}
+	if (count == 0) {
+		cout << "All of the items are available!" << endl;
+	}
+	cout << endl;
+}
+
+// FUNCTION 8: DISPLAY ALL CUSTOMERS
+
+// FUNCTION 9: DISPLAY GROUP OF CUSTOMERS
+
+// FUNCTION 10: SEARCH ITEM OR CUSTOMER
+void search_item(vector<Item*>& items, string param, int type) // Search item by name or ID
+{
+	param = lower_input(param);
+	if (type == 1) {
+		cout << endl;
+		for (int i = 0; i < items.size(); i++) {
+			if (lower_input(items[i]->getId()) == param) {
+				display_item_info(items[i]);
+			}
+		}
+		cout << endl;
+	}
+	else if (type == 2) {
+		cout << endl;
+		for (int i = 0; i < items.size(); i++) {
+			if (lower_input(items[i]->getTitle()) == param) {
+				display_item_info(items[i]);
+			}
+		}
+		cout << endl;
+	}
 }
 
 int main(int argc, char* argv[])
