@@ -13,9 +13,11 @@ using namespace std;
 vector<string> split_string(string s, string delimeter)
 {
     vector<string> result;
+
     string temp;
     int start = 0;
     int end = s.find(delimeter);
+
     result.push_back(s.substr(start, end - start));
 
     while (end != -1)
@@ -23,10 +25,6 @@ vector<string> split_string(string s, string delimeter)
         start = end + delimeter.size();
         end = s.find(delimeter, start);
         temp = s.substr(start, end - start);
-        if (temp.length() == 0)
-        {
-            continue;
-        }
         result.push_back(temp);
     }
 
@@ -139,53 +137,125 @@ void read_item_file(string filename, vector<Item *> &items)
     const int normal_length = 6;
     const int genre_length = 7;
 
-    const int rental_index = 2;
-    const int loan_index = 3;
-    const int copy_index = 4;
-    const int fee_index = 5;
-    const int genre_index = 6;
-
     ifstream myfile;
     myfile.open(filename);
 
+    if (!myfile)
+    {
+        cerr << "Cannot open file " << filename << endl;
+        return;
+    }
+
     string line;
     string delimeter = ",";
-    int copy_num;
-    double rental_fee;
-    string rental_type, loan_type;
 
     vector<string> splitted;
 
     while (getline(myfile, line))
     {
         splitted = split_string(line, ",");
+        if (splitted.empty())
+        {
+            continue;
+        }
         if (splitted.size() == normal_length || splitted.size() == genre_length)
         {
-            rental_type = splitted[rental_index];
-            loan_type = splitted[loan_index];
-            // check for rental type
-            if (!(rental_type == "Record" || rental_type == "DVD" || rental_type == "Game"))
-            {
-                continue;
-            }
-            // check for loan type
-            if (!(loan_type == "2-day" || loan_type == "1-week"))
-            {
-                continue;
-            }
-            copy_num = stoi(splitted[copy_index]);
-            rental_fee = stod(splitted[fee_index]);
+            items.push_back(new Item(splitted));
+        }
+    }
 
-            if (splitted.size() == genre_length)
-            {
-                if (rental_type == "Record" || rental_type == "DVD")
-                {
-                    items.push_back(new ItemHasGenre(splitted[0], splitted[1], splitted[2], splitted[3], copy_num, rental_fee, splitted[6]));
-                }
-                continue;
-            }
+    myfile.close();
+}
 
-            items.push_back(new Item(splitted[0], splitted[1], splitted[2], splitted[3], copy_num, rental_fee));
+void write_item_file(string filename, const vector<Item *> &items)
+{
+    ofstream myfile;
+    myfile.open(filename);
+
+    if (!myfile)
+    {
+        cerr << "Cannot open file " << filename << endl;
+        return;
+    }
+
+    for (int i = 0; i < items.size(); i++)
+    {
+        vector<string> info = items[i]->getAll();
+        int size = info.size();
+
+        for (int j = 0; j < size; j++)
+        {
+            myfile << info[j] << (j != size - 1 ? "," : "\n");
+        }
+    }
+
+    myfile.close();
+}
+
+void read_customer_file(string filename, vector<Customer *> &customers)
+{
+    ifstream myfile;
+    myfile.open(filename);
+
+    if (!myfile)
+    {
+        cerr << "Cannot open file " << filename << endl;
+        return;
+    }
+
+    string line;
+    string delimeter = ",";
+    int phone, last;
+
+    vector<string> splitted;
+
+    while (getline(myfile, line))
+    {
+        splitted = split_string(line, ",");
+        last = customers.size() - 1;
+        if (splitted.empty())
+        {
+            continue;
+        }
+        if (splitted[0][0] == 'C')
+        {
+            customers.push_back(new Customer(splitted));
+        }
+        else if (splitted[0][0] == 'I')
+        {
+            customers[last]->addItem(line);
+        }
+    }
+
+    myfile.close();
+}
+
+void write_customer_file(string filename, const vector<Customer *> &customers)
+{
+    ofstream myfile;
+    myfile.open(filename);
+
+    if (!myfile)
+    {
+        cerr << "Cannot open file " << filename << endl;
+        return;
+    }
+
+    for (int i = 0; i < customers.size(); i++)
+    {
+        vector<string> info = customers[i]->getAll();
+        int info_size = info.size();
+        for (int j = 0; j < info_size; j++)
+        {
+            myfile << info[j] << (j != info_size - 1 ? "," : "\n");
+        }
+
+        vector<string> rentals = customers[i]->getListOfRentals();
+        int rentals_size = rentals.size();
+
+        for (int j = 0; j < rentals_size; j++)
+        {
+            myfile << rentals[j] << endl;
         }
     }
 
@@ -194,10 +264,10 @@ void read_item_file(string filename, vector<Item *> &items)
 
 int main()
 {
+
     string userInput;
     string secondUserInput;
     bool isValid;
-    Customer *c1 = new Customer("C001", "Thien An", "RMIT Uni", "123456", 0, "none");
 
     do
     {

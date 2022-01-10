@@ -11,6 +11,25 @@ Item::Item(string id, string title, string rentalType, string loanType, int copi
     this->rentalFee = rentalFee;
     this->available = true;
 }
+Item::Item(vector<string> info)
+{
+    // if (!(rental_type == "Record" || rental_type == "DVD" || rental_type == "Game"))
+    // {
+    //     continue;
+    // }
+    // // check for loan type
+    // if (!(loan_type == "2-day" || loan_type == "1-week"))
+    // {
+    //     continue;
+    // }
+    this->id = info[0];
+    this->title = info[1];
+    this->rentalType = info[2];
+    this->loanType = info[3];
+    this->copies = stoi(info[4]);
+    this->rentalFee = stod(info[5]);
+    this->available = true;
+}
 // Item::Item(Item& i) {
 //     this->id = i.getId();
 //     this->title = i.getTitle();
@@ -78,4 +97,15 @@ void Item::setRentalFee(double rentalFee)
 void Item::setAvailable(bool available)
 {
     this->available = available;
+}
+vector<string> Item::getAll()
+{
+    vector<string> result;
+    result.push_back(this->id);
+    result.push_back(this->title);
+    result.push_back(this->rentalType);
+    result.push_back(this->loanType);
+    result.push_back(to_string(this->copies));
+    result.push_back(to_string(this->rentalFee));
+    return result;
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -18,8 +19,10 @@ public:
 	// constructor
 	Item();
 	Item(string id, string title, string rentalType, string loanType, int copies, double rentalFee);
+	Item(vector<string> info);
 	// Item(Item &i);
-	~Item() {};
+	// Item(Item*&i);
+	~Item(){};
 	// getters
 	string getId();
 	string getTitle();
@@ -28,6 +31,7 @@ public:
 	int getCopies();
 	double getRentalFee();
 	bool getAvailable();
+	virtual vector<string> getAll();
 	// setters
 	void setId(string id);
 	void setTitle(string title);

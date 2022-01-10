@@ -1,56 +1,44 @@
 #pragma once
 #include <string>
 #include <iostream>
+#include <vector>
+#include "Item.h"
 using namespace std;
 
-enum TypeOfAccount { GuestAccount, RegularAccount, VipAccount };
-
-class Customer {
-
+class Customer
+{
 public:
-	Customer(string id, string name, string address, string phone, int point, string rental_list, TypeOfAccount type = GuestAccount) {
-		this->id = id;
-		this->name = name;
-		this->address = address;
-		this->phone = phone;
-		this->rewardPoint = point;
-		this->listOfRentals = rental_list;
-		this->typeOfAccount = type;
-	}
+	Customer();
+	Customer(const vector<string>& info);
+	Customer(string id, string name, string address, int phone, string typeOfAccount);
+	~Customer(){};
+	string getId();
+	string getName();
+	string getAddress();
+	int getPhone();
+	int getNumOfRentals();
+	string getTypeOfAccount();
+	int getRewardPoints();
+	vector<string> getListOfRentals();
+	vector<string> getAll();
 
-	~Customer() {};
-	
-	string getId() {
-		return id;
-	}
-	
-	string getName() {
-		return name;
-	}
+	void setId(string id);
+	void setName(string name);
+	void setAddress(string address);
+	void setPhone(int phone);
+	void setNumOfRentals(int numOfRentals);
+	void setTypeOfAccount(string typeOfAccount);
+	void setRewardPoints(int rewardPoints);
 
-	string getAddress() {
-		return address;
-	}
-
-	string getPhone() {
-		return phone;
-	}
-
-	int getRewardPoint() {
-		return rewardPoint;
-	}
- 
-	TypeOfAccount getType() {
-		return typeOfAccount;
-	}
+	void addItem(string itemId);
 
 private:
 	string id;
 	string name;
 	string address;
-	string phone;
-	int rewardPoint;
-	TypeOfAccount typeOfAccount;
-	string listOfRentals;
+	int phone;
+	int numOfRentals;
+	string typeOfAccount;
+	vector<string> listOfRentals;
+	int rewardPoints;
 };
-
